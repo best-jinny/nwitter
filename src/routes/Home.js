@@ -24,7 +24,7 @@ const Home = ({ userObj }) => {
 
     let attachmentUrl = "";
 
-    if (attachment != "") {
+    if (attachment !== "") {
       const attachmentRef = storageService
         .ref()
         .child(`${userObj.uid}/${uuidv4()}`);
@@ -85,7 +85,12 @@ const Home = ({ userObj }) => {
         <input type="submit" value="Nweet" />
         {attachment && (
           <div>
-            <img src={attachment} width="50px" height="50px" />
+            <img
+              src={attachment}
+              width="50px"
+              height="50px"
+              alt="attatchment"
+            />
             <button onClick={onClearAttachment}>Clear</button>
           </div>
         )}

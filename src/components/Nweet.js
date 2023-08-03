@@ -11,7 +11,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
     if (ok) {
       //delete nweet
       await dbService.doc(`nweets/${nweetObj.id}`).delete();
-      await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+
+      if (nweetObj.attachmentUrl) {
+        await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+      }
     }
   };
 
@@ -55,7 +58,12 @@ const Nweet = ({ nweetObj, isOwner }) => {
         <>
           <h4>{nweetObj.text}</h4>
           {nweetObj.attachmentUrl && (
-            <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
+            <img
+              src={nweetObj.attachmentUrl}
+              width="50px"
+              height="50px"
+              alt="attatchment"
+            />
           )}
           {isOwner && (
             <>
