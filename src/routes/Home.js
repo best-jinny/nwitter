@@ -66,7 +66,10 @@ const Home = ({ userObj }) => {
       } = finishedEvent;
       setAttachment(result);
     };
-    reader.readAsDataURL(theFile);
+
+    if (theFile) {
+      reader.readAsDataURL(theFile);
+    }
   };
 
   const onClearAttachment = () => setAttachment(null);
