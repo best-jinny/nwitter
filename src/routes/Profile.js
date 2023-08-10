@@ -1,33 +1,17 @@
-import { authService, dbService, storageService } from "fbase";
+import { authService, storageService } from "fbase";
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 //const Profile = () => <span>profile</span>;
-//export default Profile;
 
-export default ({ refreshUser, userObj }) => {
+const Profile = ({ refreshUser, userObj }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   let [newPhotoURL, setNewPhotoURL] = useState(userObj.photoURL);
 
-  console.log(newPhotoURL);
-
-  const onLogOutClick = () => authService.signOut();
-
-  const getMyNweets = async () => {
-    const nweets = await dbService
-      .collection("nweets")
-      .where("creatorId", "==", userObj.uid)
-      .orderBy("createdAt")
-      .get();
-
-    console.log(nweets.docs.map((doc) => doc.data()));
+  const onLogOutClick = () => {
+    authService.signOut();
   };
-
-  useEffect(() => {
-    getMyNweets();
-  }, []);
 
   const onChange = (event) => {
     const {
@@ -96,3 +80,5 @@ export default ({ refreshUser, userObj }) => {
     </>
   );
 };
+
+export default Profile;
